@@ -1,2 +1,2 @@
-# Topics-in-Programming-I
+# Topics in Programming I
  Exercises on topics in programming
