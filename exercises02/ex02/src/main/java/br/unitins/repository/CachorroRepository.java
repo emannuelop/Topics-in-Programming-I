@@ -14,4 +14,8 @@ public class CachorroRepository implements PanacheRepository<Cachorro> {
         return find("LOWER(nome) LIKE LOWER(concat('%', ?1, '%'))", nome).list();
     }
 
+    // public List<Cachorro> findByNomeIgnoreCase(String nome) {
+    //    return find("FROM Cachorro WHERE upper(nome) LIKE ?1", "%" + nome.toUpperCase() + "%").list();
+    //}
+
 }
