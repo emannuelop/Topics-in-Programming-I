@@ -18,7 +18,7 @@ public class CachorroResponseDTO {
 
         this.dono.put("nome", cachorro.getDono().getNome());
         this.dono.put("sexo", cachorro.getDono().getSexo());
-        this.dono.put("sexo", cachorro.getDono().getCpf());
+        this.dono.put("cpf", cachorro.getDono().getCpf());
 
     }
 

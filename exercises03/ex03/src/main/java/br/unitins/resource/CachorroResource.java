@@ -1,6 +1,7 @@
 package br.unitins.resource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -71,8 +72,13 @@ public class CachorroResource {
     }
 
     @GET
-    public List<Cachorro> getAll() {
-        return repository.findAll().list();
+    public List<CachorroResponseDTO> getAll() {
+
+        return repository.findAll()
+                .stream()
+                .map(cachorro -> new CachorroResponseDTO(cachorro))
+                .collect(Collectors.toList());
+
     }
 
     @GET
