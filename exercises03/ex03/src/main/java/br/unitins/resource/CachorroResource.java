@@ -14,8 +14,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.unitins.dto.CachorroDTO;
+import br.unitins.dto.CachorroResponseDTO;
 import br.unitins.model.Cachorro;
 import br.unitins.repository.CachorroRepository;
+import br.unitins.repository.DonoRepository;
 
 @Path("/cachorros")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -25,31 +28,34 @@ public class CachorroResource {
     @Inject
     private CachorroRepository repository;
 
+    @Inject
+    private DonoRepository donorepository;
+
     @POST
     @Transactional
-    public Cachorro insert(Cachorro cachorro) {
+    public CachorroResponseDTO insert(CachorroDTO dto) {
 
-        repository.persist(cachorro);
+        Cachorro entity = new Cachorro();
+        entity.setNome(dto.getNome());
+        entity.setDono(donorepository.findById(dto.getIdDono()));
 
-        return cachorro;
+        repository.persist(entity);
+
+        return new CachorroResponseDTO(entity);
     }
 
     @PUT
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Cachorro uptadte(@PathParam("id") Long id, Cachorro cachorro) {
+    public Cachorro update(@PathParam("id") Long id, Cachorro cachorro) {
 
         Cachorro entity = repository.findById(id);
 
         entity.setNome(cachorro.getNome());
-        entity.setIdade(cachorro.getIdade());
-        entity.setCor(cachorro.getCor());
-        entity.setRaca(cachorro.getRaca());
-        entity.setPorte(cachorro.getPorte());
-        entity.setSexo(cachorro.getSexo());
 
         return entity;
-
     }
 
     @DELETE
@@ -84,7 +90,7 @@ public class CachorroResource {
     @GET
     @Path("/serch/{nome}")
     public List<Cachorro> search(@PathParam("nome") String nome) {
-        return repository.findByNomeIgnoreCase(nome);
+        return repository.findByNome(nome);
     }
 
 }

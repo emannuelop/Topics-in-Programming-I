@@ -10,7 +10,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 @ApplicationScoped
 public class DonoRepository implements PanacheRepository<Dono> {
 
-    public List<Dono> findByNomeIgnoreCase(String nome) {
+    public List<Dono> findByNome(String nome) {
         if (nome == null) {
             return null;
         }

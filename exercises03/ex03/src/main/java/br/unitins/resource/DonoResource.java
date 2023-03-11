@@ -37,7 +37,7 @@ public class DonoResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Dono uptadte(@PathParam("id") Long id, Dono dono) {
+    public Dono update(@PathParam("id") Long id, Dono dono) {
 
         Dono entity = repository.findById(id);
 
@@ -81,7 +81,7 @@ public class DonoResource {
     @GET
     @Path("/serch/{nome}")
     public List<Dono> search(@PathParam("nome") String nome) {
-        return repository.findByNomeIgnoreCase(nome);
+        return repository.findByNome(nome);
     }
 
 }

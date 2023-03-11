@@ -10,7 +10,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 @ApplicationScoped
 public class CachorroRepository implements PanacheRepository<Cachorro> {
 
-    public List<Cachorro> findByNomeIgnoreCase(String nome) {
+    public List<Cachorro> findByNome(String nome) {
         if (nome == null) {
             return null;
         }
